@@ -3,25 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugas WGTIK - Tugas Github</title>
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+            background-color: bisque;
+        }
+    </style>
 </head>
 <body>
+    <h1>OUTPUT ADA DI CONSOLE LOG</h1>
+    <p style="font-size: larger; color: blue;"> TUGAS WGTIK - TUGAS GITHUB</p>
+    <p> MUHAMMAD FADJAR AL FARISYI (1303223168)</p>
+    <p> FIKRI ALBAR AL GHIFARI (1303223168)</p>
+    <p> FADHIL RAKA AULIA RAHMAN (1303223168)</p>
     <script>
         function kenaRazia(date, data) {
-            var ruteGanjilGenap = [
-                "Gajah Mada",
-                "Hayam Wuruk",
-                "Sisingamangaraja",
-                "Panglima Polim",
-                "Fatmawati",
-                "Tomang Raya"
-            ];
+        var ruteGanjilGenap = [
+        "Gajah Mada",
+        "Hayam Wuruk",
+        "Sisingamangaraja",
+        "Panglima Polim",
+        "Fatmawati",
+        "Tomang Raya"
+        ];
         var tanggalGanjil = date % 2 !== 0;
         var hasil = [];
-            for (var i = 0; i < data.length; i++) {
-                var kendaraan = data[i];
+        for (var i = 0; i < data.length; i++) {
+        var kendaraan = data[i];
+        if (kendaraan.tipe === "Mobil") {
+            var nomorPlat = kendaraan.plat.match(/\d/g).join("");
+            var digitAkhir = parseInt(nomorPlat[nomorPlat.length - 1]);
+            var platganjil = digitAkhir % 2 !== 0;
+            var jumlahPelanggaran = 0;
+            var rutePelanggaran = [];
+            for (var j = 0; j < kendaraan.rute.length; j++) {
+            var ruteKendaraan = kendaraan.rute[j];
+            for (var k = 0; k < ruteGanjilGenap.length; k++) {
+                if (ruteKendaraan === ruteGanjilGenap[k]) {
+                if (tanggalGanjil !== platganjil) {
+                    jumlahPelanggaran++;
+                    rutePelanggaran.push(ruteKendaraan);
+                }
+                }
             }
-        console.log(
+            }
+            if (jumlahPelanggaran > 0) {
+                hasil.push({
+                nama: kendaraan.nama,
+                pelanggaran: jumlahPelanggaran,
+                rute: rutePelanggaran
+            });
+            }
+        }
+        }
+        return hasil;
+    }
+    console.log(
         kenaRazia(27, [
         {
             nama: "Denver",
@@ -50,7 +88,7 @@
         {
             nama: "Anna",
             plat: "B 678 DD",
-            type: "Mobil",
+            tipe: "Mobil",
             rute: [
             "Fatmawati",
             "Panglima Polim",
@@ -62,7 +100,6 @@
         }
         ])
     );
-// [ { name: ‘Toni’, tilang: 1 }, { name: ‘Anna’, tilang: 3 } ]
     </script>
 </body>
 </html>
